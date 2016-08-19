@@ -28,6 +28,7 @@
 				
 			</section><!--end of section-->
 		</div>
+        
         <script   src="https://code.jquery.com/jquery-2.2.4.js"   integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="   crossorigin="anonymous"></script>
 	   <!-- Latest compiled and minified JavaScript -->
 	   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -35,7 +36,7 @@
 	   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.js"></script>
 	
 	   <script type="text/javascript">
-           var shopList =[];
+            var shopList =[];
 			var products=["apples","bananas","blueberries","cherries","nectarines","mangoes","persimmon","pears","bread","cakes","muffins","beef","pork","fish","bacon","salami","ham","egg","milk","yoghurt","cheese","lollies","chocolates","juice"];
 			jQuery('.products').typeahead({
 			  name: 'products',
@@ -61,8 +62,10 @@
 			});
 
 			jQuery('.item-list').on('click','.remove-item',function(e){
+				var ind = jQuery(".remove-item").index( this );
+				shopList.splice(ind, 1);
+				store_item();
 				jQuery(this).parent().remove();
-                
 				e.preventDefault();
 			});
 
@@ -91,10 +94,15 @@
                }
 
            }
+           function delete_item(){
+               
+           }
         <!-- when app is in active state, retrieve what has been save by the user -->
          jQuery(document).ready(function(){
                 retrieve_item();
                 show_item();
+            
+             
              
          });
 	</script>
