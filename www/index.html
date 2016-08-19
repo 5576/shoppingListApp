@@ -92,19 +92,13 @@
                    val = shopList[i];
                    jQuery('.item-list').append('<li class="list-group-item" data-val="'+val+'"><input type="checkbox" class="check-item" style="margin-right: 10px;"/>'+val+'<a style="margin-left:20px;" id="remove-item" class="remove-item" href="#">x</a></li>')
                }
-
            }
-           function delete_item(){
-               
-           }
-        <!-- when app is in active state, retrieve what has been save by the user -->
-         jQuery(document).ready(function(){
+           
+            <!-- when app is in active state, retrieve what has been save by the user -->
+            jQuery(document).ready(function(){
                 retrieve_item();
-                show_item();
-            
-             
-             
-         });
+                show_item(); 
+           });
 	</script>
     
 	</body>
