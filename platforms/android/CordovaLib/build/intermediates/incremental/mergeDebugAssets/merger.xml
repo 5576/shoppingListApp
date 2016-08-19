@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="/Users/nhel/Downloads/project/cross apps/MyShoppingList/platforms/android/CordovaLib/assets"/><source path="/Users/nhel/Downloads/project/cross apps/MyShoppingList/platforms/android/CordovaLib/build/generated/assets/shaders/debug"/></dataSet><dataSet config="debug"><source path="/Users/nhel/Downloads/project/cross apps/MyShoppingList/platforms/android/CordovaLib/src/debug/assets"/></dataSet></merger>

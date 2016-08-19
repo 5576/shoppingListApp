@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<title></title>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="css/style.css">
+        
+	</head>
+	<body>
+		<div class="container">
+		<header class="clearfix">
+            <h2> My Shopping List</h2>
+		
+			</header> <!--end of header-->
+			<section class="main">
+                <form id="user-buy-form" method="POST" action="#">
+                    <input name="user-buy" id="user-buy" type="search" placeholder="What do you want to buy?" class="input-style products" data-provide="products" autocomplete="off">
+                    <a href="#" id="add-item">+</a>
+                    <div id="items" class="row">
+                    	<div class="col-md-3">
+	                    	<ul class="list-group item-list">
+							</ul>
+						</div>
+                    </div>
+                </form>
+				
+			</section><!--end of section-->
+		</div>
+        <script   src="https://code.jquery.com/jquery-2.2.4.js"   integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="   crossorigin="anonymous"></script>
+	   <!-- Latest compiled and minified JavaScript -->
+	   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.js"></script>
+	
+	   <script type="text/javascript">
+           var shopList =[];
+			var products=["apples","bananas","blueberries","cherries","nectarines","mangoes","persimmon","pears","bread","cakes","muffins","beef","pork","fish","bacon","salami","ham","egg","milk","yoghurt","cheese","lollies","chocolates","juice"];
+			jQuery('.products').typeahead({
+			  name: 'products',
+			  source: products
+			});
+
+			jQuery('#add-item').on('click',function(e){
+				add_item();
+				e.preventDefault();
+			});
+
+			jQuery('#user-buy-form').on('submit',function(e){
+				add_item();
+				e.preventDefault();
+			});
+
+			jQuery('.item-list').on('change','.check-item',function(e){
+				var itemCheckbox = jQuery(this);
+				if(itemCheckbox.is(':checked')){
+					itemCheckbox.attr('disabled','disabled');
+				}
+				e.preventDefault();
+			});
+
+			jQuery('.item-list').on('click','.remove-item',function(e){
+				jQuery(this).parent().remove();
+                
+				e.preventDefault();
+			});
+
+			function add_item(){
+				val = jQuery('#user-buy').val();
+                shopList.push(val);
+                store_item();
+				jQuery('.item-list').append('<li class="list-group-item" data-val="'+val+'"><input type="checkbox" class="check-item" style="margin-right: 10px;"/>'+val+'<a style="margin-left:20px;" id="remove-item" class="remove-item" href="#">x</a></li>')
+				jQuery('#user-buy').val('');
+			}
+            
+            <!-- save the items in the local storage -->
+            function store_item(){
+                localStorage.setItem('shopList', JSON.stringify(shopList));
+            }
+            <!-- reads the items in the local storage -->
+            function retrieve_item(){
+                shopList = JSON.parse(localStorage.getItem('shopList'));
+               
+            }
+           function show_item(){
+               count =  shopList.length;
+               for (var i =0; i<count; i++){
+                   val = shopList[i];
+                   jQuery('.item-list').append('<li class="list-group-item" data-val="'+val+'"><input type="checkbox" class="check-item" style="margin-right: 10px;"/>'+val+'<a style="margin-left:20px;" id="remove-item" class="remove-item" href="#">x</a></li>')
+               }
+
+           }
+        <!-- when app is in active state, retrieve what has been save by the user -->
+         jQuery(document).ready(function(){
+                retrieve_item();
+                show_item();
+             
+         });
+	</script>
+    
+	</body>
+</html>
